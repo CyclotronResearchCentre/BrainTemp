@@ -1,0 +1,14 @@
+# MATLAB
+*.asv
+*.m~
+slprj/
+*.mex*
+octave-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local output (not part of the pipeline code itself)
+mrs_pipeline_output/
+*.mat
