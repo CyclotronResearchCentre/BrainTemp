@@ -1,9 +1,30 @@
 function summaryT = run_refres_thermometry_time_blocks(refresScanNum, blockSize)
-%RUN_REFRES_THERMOMETRY_TIME_BLOCKS
-% Dynamic REF_RES thermometry by non-overlapping transient blocks.
+%RUN_REFRES_THERMOMETRY_TIME_BLOCKS  Time-resolved (dynamic) thermometry.
 %
-% Usage:
-%   summaryT = run_refres_thermometry_time_blocks(40, 4);
+%   summaryT = RUN_REFRES_THERMOMETRY_TIME_BLOCKS(refresScanNum, blockSize)
+%   splits a REF_RES acquisition's transients into consecutive,
+%   non-overlapping blocks of blockSize (e.g. transients [1-4], [5-8],
+%   [9-12], ...) and computes thermometry independently for each block,
+%   giving a temperature-vs-time curve rather than a single value. For
+%   TR = 2.25 s and blockSize = 4, temporal resolution is 9 s.
+%
+%   Inputs
+%   ------
+%   refresScanNum : scan number of the REF_RES acquisition
+%   blockSize     : number of transients per block (default: 4)
+%
+%   Output
+%   ------
+%   summaryT : table with one row per time block (block index, time,
+%              temperature, deltaPPM, water/NAA ppm)
+%
+%   Saved outputs: CSV, MAT, and PNG in cfg.outputDir
+%
+%   Example
+%   -------
+%       summaryT = run_refres_thermometry_time_blocks(40, 4);
+%
+%   See also: RUN_THERMOMETRY_REFRES_SINGLE, PLOT_REFRES_THERMOMETRY_TIME_BLOCKS
 
     if nargin < 1 || isempty(refresScanNum)
         error('Usage: summaryT = run_refres_thermometry_time_blocks(refresScanNum, blockSize)');

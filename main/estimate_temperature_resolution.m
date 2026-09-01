@@ -1,5 +1,23 @@
 function estimate_temperature_resolution(results, summaryTable)
-% Estimate digital and empirical temperature resolution
+% ESTIMATE_TEMPERATURE_RESOLUTION  How precise can this measurement be?
+%
+%   ESTIMATE_TEMPERATURE_RESOLUTION(results, summaryTable) prints two
+%   independent estimates of the pipeline's temperature precision:
+%     1) Digital resolution — the smallest temperature step the spectral
+%        digitization (Hz/point) can in principle resolve, converted via
+%        the PRF slope (dT/d(deltaPPM) = 100 degC/ppm).
+%     2) Empirical repeatability — the mean and standard deviation of
+%        temperature across repeated "ok" runs in summaryTable, i.e. what
+%        precision is actually achieved in practice.
+%
+%   Inputs
+%   ------
+%   results      : a results struct from RUN_THERMOMETRY_REFRES_SINGLE (or
+%                  similar) with results.wsres.{spectralwidth,sz,txfrq}
+%   summaryTable : (optional) a summary table from RUN_THERMOMETRY_ALL /
+%                  RUN_THERMOMETRY_REFRES_ALL, used for the empirical part
+%
+%   See also: RUN_THERMOMETRY_REFRES_SINGLE, RUN_THERMOMETRY_ALL
 
     % --- Digital spectral resolution ---
     sw_Hz = results.wsres.spectralwidth;

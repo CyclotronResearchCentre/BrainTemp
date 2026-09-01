@@ -1,26 +1,38 @@
 function summaryTable = run_thermometry_all(refScanList)
-% RUN_THERMOMETRY_ALL
-% Runs run_thermometry_single on all available REF scans or on a user-
-% provided subset, then creates a summary table and a summary figure.
+% RUN_THERMOMETRY_ALL  Batch thermometry across multiple REF scans.
 %
-% Usage:
-%   summaryTable = run_thermometry_all();
-%   summaryTable = run_thermometry_all([34 39 44 49 54]);
+%   summaryTable = RUN_THERMOMETRY_ALL(refScanList) calls
+%   RUN_THERMOMETRY_SINGLE on every REF scan in refScanList (or every REF
+%   scan found in cfg.refDir, if omitted), then collects the results into
+%   one summary table and one summary figure.
 %
-% Outputs:
-%   summaryTable : MATLAB table summarizing all runs
+%   Input
+%   -----
+%   refScanList : (optional) vector of REF scan numbers to process;
+%                 defaults to all REF scans found in cfg.refDir
 %
-% Saved outputs:
-%   - thermometry_summary.csv
-%   - thermometry_summary.mat
-%   - thermometry_summary.png
+%   Output
+%   ------
+%   summaryTable : MATLAB table with one row per scan (temperature,
+%                  deltaPPM, water/NAA ppm, status)
+%
+%   Saved outputs
+%   -------------
+%   thermometry_summary.csv / .mat / .png in cfg.outputDir
+%
+%   Example
+%   -------
+%       summaryTable = run_thermometry_all();
+%       summaryTable = run_thermometry_all([34 39 44 49 54]);
+%
+%   See also: RUN_THERMOMETRY_SINGLE, RUN_THERMOMETRY_REFRES_ALL
 
     % ---------------------------------------------------------------------
     % Load config and paths
     % ---------------------------------------------------------------------
     cfg = get_default_config();
 
-    addpath(genpath('/home/mohamed/Codes/MyGitlab/mrs_pipeline'));
+    addpath(genpath(fileparts(fileparts(mfilename('fullpath'))))); % repo root, portable
     addpath(genpath(cfg.ospreyPath));
     rehash;
 

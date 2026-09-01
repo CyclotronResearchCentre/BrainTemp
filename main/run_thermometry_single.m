@@ -1,19 +1,38 @@
 function run_thermometry_single(refScanNum, cfg)
-% RUN_THERMOMETRY_SINGLE
-% Runs a thermometry workflow:
-%   1) load REF and nearest WS_RES
-%   2) preprocess REF for water fit
-%   3) preprocess WS_RES for NAA fit, including ECC with REF
-%   4) fit water and NAA peaks
-%   5) compute chemical shift difference
-%   6) estimate temperature
-%   7) save preprocessing and fitting figures
+% RUN_THERMOMETRY_SINGLE  Classic two-scan thermometry: REF + nearest WS_RES.
+%
+%   RUN_THERMOMETRY_SINGLE(refScanNum, cfg) runs the "separate water
+%   reference" workflow, as opposed to RUN_THERMOMETRY_REFRES_SINGLE's
+%   single-scan (REF_RES) approach:
+%     1) load REF and the nearest WS_RES scan
+%     2) preprocess REF for the water fit
+%     3) preprocess WS_RES for the NAA fit, including eddy-current
+%        correction (ECC) against REF
+%     4) fit water and NAA peaks
+%     5) compute the water-NAA chemical shift and temperature
+%     6) save the results struct (.mat) and QC/summary figures
+%
+%   This function has no return value — everything is written to
+%   cfg.outputMatDir / cfg.outputFigDir and printed to the console.
+%
+%   Inputs
+%   ------
+%   refScanNum : scan number of the REF (water reference) acquisition
+%   cfg        : (optional) config struct from GET_DEFAULT_CONFIG;
+%                defaults to GET_DEFAULT_CONFIG() if omitted
+%
+%   Example
+%   -------
+%       run_thermometry_single(39)
+%
+%   See also: RUN_THERMOMETRY_REFRES_SINGLE, RUN_THERMOMETRY_ALL,
+%   COMPUTE_TEMPERATURE_FROM_SHIFT
 
     if nargin < 2 || isempty(cfg)
         cfg = get_default_config();
     end
 
-    addpath(genpath('/home/mohamed/Codes/MyGitlab/mrs_pipeline'));
+    addpath(genpath(fileparts(fileparts(mfilename('fullpath'))))); % repo root, portable
     addpath(genpath(cfg.ospreyPath));
     rehash;
 

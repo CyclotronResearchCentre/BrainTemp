@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 400" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#065A82"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1320" height="400" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text x="660" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0E2233">MRS Thermometry Pipeline</text>
+  <text x="660" y="56" text-anchor="middle" font-size="13" fill="#5A6B78">raw single-voxel spectrum to a PRF temperature estimate</text>
+
+  <!-- Stage 1: Raw data -->
+  <g>
+    <rect x="20" y="100" width="190" height="180" rx="14" fill="#FFFFFF" stroke="#065A82" stroke-width="2"/>
+    <text x="115" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#065A82">RAW DATA</text>
+    <line x1="45" y1="144" x2="185" y2="144" stroke="#DDEAF0" stroke-width="1"/>
+    <text x="115" y="168" text-anchor="middle" font-size="12.5" fill="#222B33">NIfTI-MRS</text>
+    <text x="115" y="196" text-anchor="middle" font-size="11" fill="#5A6B78">REF (unsuppressed</text>
+    <text x="115" y="212" text-anchor="middle" font-size="11" fill="#5A6B78">water reference)</text>
+    <text x="115" y="238" text-anchor="middle" font-size="11" fill="#5A6B78">WS / WS_RES</text>
+    <text x="115" y="254" text-anchor="middle" font-size="11" fill="#5A6B78">(water-suppressed)</text>
+  </g>
+  <path d="M210,190 L252,190" stroke="#065A82" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: Preprocessing -->
+  <g>
+    <rect x="256" y="88" width="300" height="204" rx="14" fill="#EAF2F6" stroke="#065A82" stroke-width="2"/>
+    <text x="406" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#065A82">PREPROCESSING</text>
+    <line x1="280" y1="130" x2="536" y2="130" stroke="#CADCF5" stroke-width="1"/>
+    <text x="406" y="153" text-anchor="middle" font-size="12" fill="#222B33">1. Transient alignment</text>
+    <text x="406" y="178" text-anchor="middle" font-size="12" fill="#222B33">2. Frequency + phase correction</text>
+    <text x="406" y="203" text-anchor="middle" font-size="12" fill="#222B33">3. Averaging</text>
+    <text x="406" y="228" text-anchor="middle" font-size="12" fill="#222B33">4. Polarity correction</text>
+    <text x="406" y="253" text-anchor="middle" font-size="12" fill="#222B33">5. Residual water removal</text>
+    <text x="406" y="278" text-anchor="middle" font-size="10.5" font-style="italic" fill="#5A6B78">(eddy-current corrected, Klose)</text>
+  </g>
+  <path d="M556,190 L598,190" stroke="#065A82" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: Peak fitting -->
+  <g>
+    <rect x="602" y="100" width="210" height="180" rx="14" fill="#FFFFFF" stroke="#1C7293" stroke-width="2"/>
+    <text x="707" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#1C7293">PEAK FITTING</text>
+    <line x1="627" y1="144" x2="787" y2="144" stroke="#DDEAF0" stroke-width="1"/>
+    <text x="707" y="172" text-anchor="middle" font-size="12" fill="#222B33">Water peak</text>
+    <text x="707" y="190" text-anchor="middle" font-size="11" fill="#5A6B78">(~4.7 ppm)</text>
+    <text x="707" y="220" text-anchor="middle" font-size="12" fill="#222B33">NAA peak</text>
+    <text x="707" y="238" text-anchor="middle" font-size="11" fill="#5A6B78">(~2.0 ppm)</text>
+    <text x="707" y="264" text-anchor="middle" font-size="10.5" font-style="italic" fill="#5A6B78">Lorentzian / pseudo-Voigt</text>
+  </g>
+  <path d="M812,190 L854,190" stroke="#1C7293" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: Delta ppm -->
+  <g>
+    <rect x="858" y="130" width="150" height="120" rx="14" fill="#FBEAE0" stroke="#E85D04" stroke-width="2"/>
+    <text x="933" y="168" text-anchor="middle" font-size="15" font-weight="700" fill="#C2531E">&#916;ppm</text>
+    <text x="933" y="192" text-anchor="middle" font-size="11" fill="#222B33">water &#8722; NAA</text>
+    <text x="933" y="212" text-anchor="middle" font-size="11" fill="#222B33">shift, ppm</text>
+  </g>
+  <path d="M1008,190 L1050,190" stroke="#E85D04" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: Temperature -->
+  <g>
+    <rect x="1054" y="100" width="246" height="180" rx="14" fill="#E85D04"/>
+    <text x="1177" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">TEMPERATURE</text>
+    <text x="1177" y="164" text-anchor="middle" font-size="11" fill="#FCE3D2">PRF method</text>
+    <text x="1177" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFFFF">T(&#176;C) = 37 &#8722;</text>
+    <text x="1177" y="220" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFFFF">100&#215;(&#916;ppm &#8722; 2.665)</text>
+    <text x="1177" y="252" text-anchor="middle" font-size="10" fill="#FCE3D2">+ transient-stability &amp;</text>
+    <text x="1177" y="266" text-anchor="middle" font-size="10" fill="#FCE3D2">dynamic (time-resolved) modes</text>
+  </g>
+
+  <!-- Bottom note -->
+  <text x="660" y="350" text-anchor="middle" font-size="11.5" fill="#5A6B78">Every stage has a matching QC plot (plotting/) so preprocessing and fitting can be checked visually, not just trusted blindly.</text>
+  <text x="660" y="372" text-anchor="middle" font-size="10.5" fill="#8A97A3">Built on FID-A (Simpson et al. 2017) and Osprey (Oeltzschner et al. 2020)</text>
+</svg>

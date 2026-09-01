@@ -1,13 +1,34 @@
 function results = run_thermometry_unsuppressed_single(dataPath)
-% RUN_THERMOMETRY_UNSUPPRESSED_SINGLE
-% Thermometry from one unsuppressed multi-transient MRS acquisition.
+% RUN_THERMOMETRY_UNSUPPRESSED_SINGLE  Thermometry from a raw file path.
 %
-% Usage:
-%   results = run_thermometry_unsuppressed_single('/path/to/file.nii.gz')
+%   results = RUN_THERMOMETRY_UNSUPPRESSED_SINGLE(dataPath) runs the same
+%   preprocess-fit-thermometry chain as RUN_THERMOMETRY_REFRES_SINGLE, but
+%   takes a NIfTI-MRS file path directly instead of looking one up by scan
+%   number. RUN_THERMOMETRY_REFRES_SINGLE calls this internally after
+%   resolving the scan number to a path; call this one directly if you
+%   already have the file path (e.g. data outside the standard REF/WS
+%   folder layout).
+%
+%   Input
+%   -----
+%   dataPath : full path to an unsuppressed, multi-transient NIfTI-MRS
+%              file (e.g. a REF_RES acquisition)
+%
+%   Output
+%   ------
+%   results : struct with results.thermo.{deltaPPM,temperatureC},
+%             results.waterFit / results.naaFit, and preprocessing steps.
+%             Saved to <outputMatDir>/<filename>_unsuppressed_thermometry.mat
+%
+%   Example
+%   -------
+%       results = run_thermometry_unsuppressed_single('/path/to/file.nii.gz')
+%
+%   See also: RUN_THERMOMETRY_REFRES_SINGLE, COMPUTE_TEMPERATURE_FROM_SHIFT
 
     cfg = get_default_config();
 
-    addpath(genpath('/home/mohamed/Codes/MyGitlab/mrs_pipeline'));
+    addpath(genpath(fileparts(fileparts(mfilename('fullpath'))))); % repo root, portable
     addpath(genpath(cfg.ospreyPath));
     rehash;
 

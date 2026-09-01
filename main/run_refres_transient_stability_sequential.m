@@ -1,18 +1,35 @@
 function summaryN = run_refres_transient_stability_sequential(refresScanNum, nList)
-% RUN_REFRES_TRANSIENT_STABILITY_SEQUENTIAL
-% Tests unsuppressed REF_RES thermometry stability as a function of the
-% first N included transients.
+% RUN_REFRES_TRANSIENT_STABILITY_SEQUENTIAL  How many transients are enough?
 %
-% If nList is not provided, it is automatically generated using a step of 4:
-%   [4 8 12 16 ... nTotal]
+%   summaryN = RUN_REFRES_TRANSIENT_STABILITY_SEQUENTIAL(refresScanNum, nList)
+%   re-runs REF_RES thermometry using only the first N transients, for
+%   each N in nList, so you can see how the water peak, NAA peak, deltaPPM,
+%   and temperature estimate converge as more transients (more averaging)
+%   are included. Useful for choosing how many transients a real
+%   acquisition actually needs.
 %
-% Usage:
-%   summaryN = run_refres_transient_stability_sequential(83);
-%   summaryN = run_refres_transient_stability_sequential(83, [4 8 16 32 64]);
+%   Inputs
+%   ------
+%   refresScanNum : scan number of the REF_RES acquisition
+%   nList         : (optional) vector of transient counts to test;
+%                   defaults to [4 8 12 16 ... nTotal] if omitted
+%
+%   Output
+%   ------
+%   summaryN : table with one row per N (water/NAA ppm, deltaPPM,
+%              temperature, as a function of N)
+%
+%   Example
+%   -------
+%       summaryN = run_refres_transient_stability_sequential(83);
+%       summaryN = run_refres_transient_stability_sequential(83, [4 8 16 32 64]);
+%
+%   See also: RUN_THERMOMETRY_TRANSIENT_STABILITY_SEQUENTIAL,
+%   PLOT_REFRES_TRANSIENT_STABILITY
 
     cfg = get_default_config();
 
-    addpath(genpath('/home/mohamed/Codes/MyGitlab/mrs_pipeline'));
+    addpath(genpath(fileparts(fileparts(mfilename('fullpath'))))); % repo root, portable
     addpath(genpath(cfg.ospreyPath));
     rehash;
 

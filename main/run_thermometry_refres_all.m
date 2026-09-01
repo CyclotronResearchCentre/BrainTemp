@@ -1,9 +1,25 @@
 function summaryTable = run_thermometry_refres_all(refresScanList)
-% RUN_THERMOMETRY_REFRES_ALL
-% Runs unsuppressed REF_RES thermometry for selected REF_RES scans.
+% RUN_THERMOMETRY_REFRES_ALL  Batch thermometry across REF_RES scans.
 %
-% Usage:
-%   summaryTable = run_thermometry_refres_all([40 46 52 71 77 83]);
+%   summaryTable = RUN_THERMOMETRY_REFRES_ALL(refresScanList) calls
+%   RUN_THERMOMETRY_REFRES_SINGLE on each scan number in refresScanList
+%   and collects the results into one summary table + figure. The
+%   REF_RES (single-scan, unsuppressed) counterpart to RUN_THERMOMETRY_ALL.
+%
+%   Input
+%   -----
+%   refresScanList : (optional) vector of REF_RES scan numbers;
+%                    defaults to [40 46 52 71 77 83] if omitted
+%
+%   Output
+%   ------
+%   summaryTable : MATLAB table with one row per scan
+%
+%   Example
+%   -------
+%       summaryTable = run_thermometry_refres_all([40 46 52 71 77 83]);
+%
+%   See also: RUN_THERMOMETRY_REFRES_SINGLE, RUN_THERMOMETRY_ALL
 
     if nargin < 1 || isempty(refresScanList)
         refresScanList = [40 46 52 71 77 83];
@@ -11,7 +27,7 @@ function summaryTable = run_thermometry_refres_all(refresScanList)
 
     cfg = get_default_config();
 
-    addpath(genpath('/home/mohamed/Codes/MyGitlab/mrs_pipeline'));
+    addpath(genpath(fileparts(fileparts(mfilename('fullpath'))))); % repo root, portable
     addpath(genpath(cfg.ospreyPath));
     rehash;
 

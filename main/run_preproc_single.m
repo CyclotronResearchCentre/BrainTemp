@@ -1,6 +1,21 @@
 function run_preproc_single(refScanNum)
-% RUN_PREPROC_SINGLE
-% Main entry point for running the preprocessing pipeline on one REF scan.
+% RUN_PREPROC_SINGLE  Preprocessing only, no fitting/thermometry.
+%
+%   RUN_PREPROC_SINGLE(refScanNum) runs preprocessing (alignment, polarity
+%   correction, frequency/phase correction, residual-water removal) on the
+%   REF/WS_RES pair for one REF scan, and saves the QC figures, without
+%   fitting peaks or computing a temperature. Useful for checking data
+%   quality before committing to a full thermometry run.
+%
+%   Input
+%   -----
+%   refScanNum : scan number of the REF acquisition
+%
+%   Example
+%   -------
+%       run_preproc_single(39)
+%
+%   See also: RUN_THERMOMETRY_SINGLE, PREPROCESS_WSRES_FROM_REF
 
     cfg = get_default_config();
 

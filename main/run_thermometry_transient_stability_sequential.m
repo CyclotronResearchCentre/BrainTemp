@@ -1,16 +1,29 @@
 function summaryN = run_thermometry_transient_stability_sequential(refScanNum, nList)
-% RUN_THERMOMETRY_TRANSIENT_STABILITY_SEQUENTIAL
-% Tests temperature stability as a function of the number of WS_RES transients.
+% RUN_THERMOMETRY_TRANSIENT_STABILITY_SEQUENTIAL  Convergence check (WS_RES).
 %
-% This uses the first N transients:
-%   N = 4  -> transients 1:4
-%   N = 8  -> transients 1:8
-%   N = 16 -> transients 1:16
-%   etc.
+%   summaryN = RUN_THERMOMETRY_TRANSIENT_STABILITY_SEQUENTIAL(refScanNum, nList)
+%   is the classic two-scan (REF + WS_RES) counterpart to
+%   RUN_REFRES_TRANSIENT_STABILITY_SEQUENTIAL: it re-runs thermometry using
+%   only the first N WS_RES transients, for each N in nList (N=4 ->
+%   transients 1:4, N=8 -> transients 1:8, etc.), to show how the
+%   temperature estimate stabilizes as more transients are averaged.
 %
-% Usage:
-%   summaryN = run_thermometry_transient_stability_sequential(39);
-%   summaryN = run_thermometry_transient_stability_sequential(39, [4 8 16 32 64]);
+%   Inputs
+%   ------
+%   refScanNum : scan number of the REF acquisition
+%   nList      : (optional) vector of transient counts to test;
+%                defaults to [4 8 12 ... 64] if omitted
+%
+%   Output
+%   ------
+%   summaryN : table with one row per N
+%
+%   Example
+%   -------
+%       summaryN = run_thermometry_transient_stability_sequential(39);
+%       summaryN = run_thermometry_transient_stability_sequential(39, [4 8 16 32 64]);
+%
+%   See also: RUN_REFRES_TRANSIENT_STABILITY_SEQUENTIAL, RUN_THERMOMETRY_SINGLE
 
     if nargin < 2 || isempty(nList)
         nList = [4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64];
@@ -18,7 +31,7 @@ function summaryN = run_thermometry_transient_stability_sequential(refScanNum, n
 
     cfg = get_default_config();
 
-    addpath(genpath('/home/mohamed/Codes/MyGitlab/mrs_pipeline'));
+    addpath(genpath(fileparts(fileparts(mfilename('fullpath'))))); % repo root, portable
     addpath(genpath(cfg.ospreyPath));
     rehash;
 
