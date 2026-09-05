@@ -89,6 +89,22 @@ your own data folder and Osprey installation.
 
 ---
 
+## Example output
+
+Real output from `run_thermometry_single`, run on a phantom REF/WS_RES pair
+at room temperature — water and NAA peak fits, fit residuals, and the
+resulting temperature estimate:
+
+<p align="center">
+  <img src="docs/example_outputs/thermometry_fit.png" alt="Water and NAA Lorentzian fits with residuals, giving Delta ppm = 2.824 and T = 21.1 degC" width="100%">
+</p>
+
+21.1 °C for a room-temperature phantom is exactly the expected ballpark,
+which is a good sanity check that the fitting and PRF conversion are
+behaving correctly end to end.
+
+---
+
 ## Supported acquisition types
 
 <p align="center">
@@ -185,6 +201,16 @@ alignment, frequency/phase corrections, polarity check, residual-water
 removal, peak-fit summaries, transient-stability curves, and dynamic
 (time-block) thermometry — so every number the pipeline reports can be
 checked visually, not just trusted blindly.
+
+<p align="center">
+  <img src="docs/example_outputs/metabolite_preprocessing_steps.png" alt="Nine-panel QC figure for the metabolite branch: before/after alignment, ECC, polarity correction, water removal, NAA fit, and run summary" width="100%">
+</p>
+
+Every stage before and after it is checked the same way — including the
+water branch (`docs/example_outputs/water_preprocessing_steps.png`) and
+per-transient alignment QC, shown here for the
+[water region](docs/example_outputs/transient_alignment_qc_water.png) and
+the [NAA region](docs/example_outputs/transient_alignment_qc_naa.png).
 
 ---
 
