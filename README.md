@@ -50,18 +50,22 @@ function of temperature: the **proton resonance frequency (PRF) method**.
 
 ```
 Δppm  = δ(water) − δ(NAA)
-T(°C) = T_ref − slope × (Δppm − Δppm_ref)
+T(°C) = a − b × Δppm
 ```
 
-`T_ref`, `slope`, and `Δppm_ref` are **not universal constants** — they're a
-calibration, specific to a given scanner, coil, and temperature range. They
-live in [`config/get_default_config.m`](config/get_default_config.m)
-(`cfg.tempRefC`, `cfg.tempSlope`, `cfg.tempDeltaRefPPM`), not hardcoded in
-the processing code, precisely so they can be replaced. The repository
-ships with one published set of values as a default/example (37, 100, 2.665
-— Thrippleton et al., *NMR Biomed* 2014, doi:10.1002/nbm.3050), but you
-should re-derive your own from a phantom calibration before trusting
-absolute temperatures out of this pipeline on your system.
+`a` and `b` are **not universal constants** — they're a linear calibration,
+specific to a given scanner, coil, and temperature range, the same way any
+regression coefficients in a calibration paper are tied to that paper's own
+setup. They live in
+[`config/get_default_config.m`](config/get_default_config.m)
+(`cfg.tempRefC`, `cfg.tempSlope`, `cfg.tempDeltaRefPPM` — internally kept as
+a reference point + slope rather than raw `a`/`b`, but algebraically the
+same line), not hardcoded in the processing code, precisely so they can be
+replaced. The repository ships with one published calibration as a
+default/example (Thrippleton et al., *NMR Biomed* 2014,
+doi:10.1002/nbm.3050), but you should re-derive your own `a`, `b` from a
+phantom calibration before trusting absolute temperatures out of this
+pipeline on your system.
 
 ---
 
