@@ -18,9 +18,9 @@ validated brain-temperature estimate — end to end, with QC at every step.**
 ## Why this exists
 
 Several excellent open-source toolboxes exist for general MRS quantification
-— [Osprey](https://github.com/schorschinho/osprey),
-[FID-A](https://github.com/CIC-methods/FID-A), LCModel, FSL-MRS (full
-references under [Dependencies](#dependencies)). None of
+— [Osprey](https://github.com/schorschinho/osprey) [1],
+[FID-A](https://github.com/CIC-methods/FID-A) [2], FSL-MRS [3], LCModel [4]
+(full references [below](#references)). None of
 them ship the specific chain a *validated brain-temperature estimate*
 actually needs: transient alignment, frequency/phase correction,
 eddy-current and residual-water correction, dual water/NAA peak fitting,
@@ -139,21 +139,8 @@ works too).
 **Required:** MATLAB R2024a or newer
 
 **External toolboxes:**
-- [FID-A](https://github.com/CIC-methods/FID-A) — spectral processing, alignment, FFT utilities.
-  Simpson R, Devenyi GA, Jezzard P, Hennessy TJ, Near J. "Advanced processing and
-  simulation of MRS data using the FID appliance (FID-A) — An open source,
-  MATLAB-based toolkit." *Magn Reson Med.* 2017;77(1):23-33. doi:10.1002/mrm.26091
-- [Osprey](https://github.com/schorschinho/osprey) — NIfTI-MRS import, spectral registration, preprocessing.
-  Oeltzschner G, Zöllner HJ, Hui SCN, et al. "Osprey: Open-source processing,
-  reconstruction & estimation of magnetic resonance spectroscopy data."
-  *J Neurosci Methods.* 2020;343:108827. doi:10.1016/j.jneumeth.2020.108827
-
-**Related MRS quantification tools** (mentioned above, not used directly by
-this pipeline, but relevant prior art for anyone comparing approaches):
-- LCModel — Provencher SW. "Estimation of metabolite concentrations from
-  localized in vivo proton NMR spectra." *Magn Reson Med.* 1993;30(6):672-679.
-- FSL-MRS — Clarke WT, Stagg CJ, Jbabdi S. "FSL-MRS: An end-to-end
-  spectroscopy analysis package." *Magn Reson Med.* 2021;85(6):2950-2964.
+- [FID-A](https://github.com/CIC-methods/FID-A) — spectral processing, alignment, FFT utilities. [2]
+- [Osprey](https://github.com/schorschinho/osprey) — NIfTI-MRS import, spectral registration, preprocessing. [1]
 
 ---
 
@@ -237,23 +224,37 @@ the [NAA region](docs/example_outputs/transient_alignment_qc_naa.png).
 
 ---
 
-## Citation
-
-If you use this pipeline, please cite it alongside the toolboxes it's
-built on (FID-A and Osprey, above). If you also used the *default*
-calibration values shipped in `config/get_default_config.m` rather than
-your own, please cite the PRF calibration reference too (Thrippleton et
-al. 2014, above) — those numbers are theirs, not a pipeline-derived
-result. See [`CITATION.cff`](CITATION.cff) for the pipeline itself; a DOI
-will be added once the repository is archived (e.g. via Zenodo).
-
----
-
 ## Further reading
 
 [`Unsupressed_water.md`](Unsupressed_water.md) — a detailed write-up of the
 unsuppressed (REF_RES) thermometry approach: estimating water and NAA from
 the same acquisition, without a separate water-suppressed scan.
+
+---
+
+## References
+
+[1] Oeltzschner G, Zöllner HJ, Hui SCN, et al. Osprey: Open-source
+processing, reconstruction & estimation of magnetic resonance spectroscopy
+data. *J Neurosci Methods.* 2020;343:108827.
+
+[2] Simpson R, Devenyi GA, Jezzard P, Hennessy TJ, Near J. Advanced
+processing and simulation of MRS data using the FID appliance (FID-A).
+*Magn Reson Med.* 2017;77(1):23-33.
+
+[3] Clarke WT, Stagg CJ, Jbabdi S. FSL-MRS: An end-to-end spectroscopy
+analysis package. *Magn Reson Med.* 2021;85(6):2950-2964.
+
+[4] Provencher SW. Estimation of metabolite concentrations from localized
+in vivo proton NMR spectra. *Magn Reson Med.* 1993;30(6):672-679.
+
+---
+
+## Funding
+
+This still-ongoing work is supported by the SAO-FRA (Stichting Alzheimer
+Onderzoek / Fondation Recherche Alzheimer, grant #20250021 — BRAINTEMP)
+and the FNRS-F.R.S. (2026/V 6/5/034 — JG/DeM — 1872).
 
 ---
 
