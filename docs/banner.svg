@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 260" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06344a"/>
+      <stop offset="100%" stop-color="#0E4C6B"/>
+    </linearGradient>
+    <linearGradient id="specLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3FBECF"/>
+      <stop offset="100%" stop-color="#F0834A"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1320" height="260" fill="url(#bg)"/>
+
+  <!-- faint decorative circle -->
+  <circle cx="1180" cy="40" r="150" fill="#1C7293" opacity="0.25"/>
+  <circle cx="60" cy="230" r="90" fill="#E85D04" opacity="0.15"/>
+
+  <!-- spectrum motif, subtle, right side -->
+  <g opacity="0.9">
+    <polyline fill="none" stroke="url(#specLine)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"
+      points="760,190 800,188 830,186 850,150 865,120 878,150 895,187 940,190 985,190 1000,120 1015,60 1030,120 1045,190 1090,190 1130,190"/>
+    <line x1="760" y1="190" x2="1130" y2="190" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="878" y="112" text-anchor="middle" font-size="12" fill="#8fd8e0" font-weight="600">NAA</text>
+    <text x="1015" y="52" text-anchor="middle" font-size="12" fill="#f5b48a" font-weight="600">H&#8322;O</text>
+  </g>
+
+  <text x="70" y="100" font-size="38" font-weight="700" fill="#FFFFFF">MRS Thermometry Pipeline</text>
+  <text x="70" y="140" font-size="18" fill="#BFE4EC">Raw single-voxel &#185;H-MRS &#8594; validated brain-temperature estimate</text>
+
+  <text x="70" y="185" font-size="13" fill="#8FB4C7">MATLAB &#183; built on FID-A &amp; Osprey &#183; open source</text>
+</svg>

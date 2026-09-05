@@ -1,12 +1,17 @@
-# MRS Thermometry Pipeline
+<p align="center">
+  <img src="docs/banner.svg" alt="MRS Thermometry Pipeline — raw single-voxel 1H-MRS to a validated brain-temperature estimate" width="100%">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/MATLAB-R2024a%2B-0076A8?logo=mathworks&logoColor=white" alt="MATLAB R2024a+">
+  <img src="https://img.shields.io/badge/status-validation%20in%20progress-E85D04" alt="Status: validation in progress">
+  <img src="https://img.shields.io/badge/license-TBD-lightgrey" alt="License: TBD">
+  <img src="https://img.shields.io/badge/open%20source-open%20workflows-1C7293" alt="Open source, open workflows">
+  <img src="https://img.shields.io/badge/built%20on-FID--A%20%2B%20Osprey-0E7A8C" alt="Built on FID-A and Osprey">
+</p>
 
 **A MATLAB pipeline that turns a raw single-voxel ¹H-MRS acquisition into a
 validated brain-temperature estimate — end to end, with QC at every step.**
-
-![MATLAB](https://img.shields.io/badge/MATLAB-R2024a%2B-0076A8?logo=mathworks&logoColor=white)
-![Status](https://img.shields.io/badge/status-validation%20in%20progress-E85D04)
-![License](https://img.shields.io/badge/license-TBD-lightgrey)
-![Open Science](https://img.shields.io/badge/open%20source-open%20workflows-1C7293)
 
 ---
 
@@ -77,12 +82,9 @@ your own data folder and Osprey installation.
 
 ## Supported acquisition types
 
-| Type | Description | Used for |
-|---|---|---|
-| **REF** | Unsuppressed water reference | water peak estimation, eddy-current correction, frequency referencing |
-| **REF_RES** | Transient-resolved unsuppressed acquisition | water thermometry, transient-stability analysis, dynamic thermometry |
-| **WS** | Scanner-averaged water-suppressed spectrum | NAA peak estimation, metabolite thermometry |
-| **WS_RES** | Transient-resolved water-suppressed acquisition | transient alignment, frequency-drift analysis, optimized averaging |
+<p align="center">
+  <img src="docs/acquisition_types.svg" alt="Four supported acquisition types: REF, REF_RES, WS, WS_RES, with what each is used for" width="100%">
+</p>
 
 ---
 
@@ -97,7 +99,7 @@ mrs_pipeline-main/
 ├── plotting/     one QC/summary figure per pipeline stage
 ├── qc/           small standalone quality checks
 ├── utils/        generic helpers (I/O, struct field lookups)
-└── docs/         architecture diagram
+└── docs/         architecture, acquisition-type, and banner diagrams
 ```
 
 Every folder is documented file-by-file, function-by-function — see the
