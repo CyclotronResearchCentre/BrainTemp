@@ -5,7 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/MATLAB-R2024a%2B-0076A8?logo=mathworks&logoColor=white" alt="MATLAB R2024a+">
   <img src="https://img.shields.io/badge/status-validation%20in%20progress-E85D04" alt="Status: validation in progress">
-  <img src="https://img.shields.io/badge/license-TBD-lightgrey" alt="License: TBD">
+  <img src="https://img.shields.io/badge/license-GPL--3.0-3DA639" alt="License: GPL-3.0">
   <img src="https://img.shields.io/badge/open%20source-open%20workflows-1C7293" alt="Open source, open workflows">
   <img src="https://img.shields.io/badge/built%20on-FID--A%20%2B%20Osprey-0E7A8C" alt="Built on FID-A and Osprey">
 </p>
@@ -19,7 +19,8 @@ validated brain-temperature estimate — end to end, with QC at every step.**
 
 Several excellent open-source toolboxes exist for general MRS quantification
 — [Osprey](https://github.com/schorschinho/osprey),
-[FID-A](https://github.com/CIC-methods/FID-A), LCModel, FSL-MRS. None of
+[FID-A](https://github.com/CIC-methods/FID-A), LCModel, FSL-MRS (full
+references under [Dependencies](#dependencies)). None of
 them ship the specific chain a *validated brain-temperature estimate*
 actually needs: transient alignment, frequency/phase correction,
 eddy-current and residual-water correction, dual water/NAA peak fitting,
@@ -147,6 +148,13 @@ works too).
   reconstruction & estimation of magnetic resonance spectroscopy data."
   *J Neurosci Methods.* 2020;343:108827. doi:10.1016/j.jneumeth.2020.108827
 
+**Related MRS quantification tools** (mentioned above, not used directly by
+this pipeline, but relevant prior art for anyone comparing approaches):
+- LCModel — Provencher SW. "Estimation of metabolite concentrations from
+  localized in vivo proton NMR spectra." *Magn Reson Med.* 1993;30(6):672-679.
+- FSL-MRS — Clarke WT, Stagg CJ, Jbabdi S. "FSL-MRS: An end-to-end
+  spectroscopy analysis package." *Magn Reson Med.* 2021;85(6):2950-2964.
+
 ---
 
 ## Data organization
@@ -232,9 +240,12 @@ the [NAA region](docs/example_outputs/transient_alignment_qc_naa.png).
 ## Citation
 
 If you use this pipeline, please cite it alongside the toolboxes it's
-built on (FID-A and Osprey, above) and the PRF calibration reference
-(Thrippleton et al. 2014, above). A `CITATION.cff` will be added once the
-repository has a permanent home and DOI.
+built on (FID-A and Osprey, above). If you also used the *default*
+calibration values shipped in `config/get_default_config.m` rather than
+your own, please cite the PRF calibration reference too (Thrippleton et
+al. 2014, above) — those numbers are theirs, not a pipeline-derived
+result. See [`CITATION.cff`](CITATION.cff) for the pipeline itself; a DOI
+will be added once the repository is archived (e.g. via Zenodo).
 
 ---
 
@@ -248,10 +259,5 @@ the same acquisition, without a separate water-suppressed scan.
 
 ## License
 
-License to be finalized before the repository is made public — check with
-the repository owner before reuse in the meantime.
-
-## Authors
-
-Developed within the BrainTemp project · MR Spectroscopy · Thermometry ·
-NIfTI-MRS · Quantitative MRI · Signal Processing
+[GPL-3.0](LICENSE) — FID-A (BSD-3-Clause) and Osprey (MIT) are both
+permissive licenses and compatible with this choice.
